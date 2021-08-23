@@ -15,9 +15,12 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <bits/stdc++.h>
 using namespace std;
 
+#define MAX 100
 //Dao nguoc xau
 string daoNguoc(string s)
 {
@@ -40,19 +43,40 @@ int main()
     cout << "Xau co do dai" << s.length() << endl;
 
     //cau b:
-    int i, dem = 0;
-    for(i = 'A'; i<'z';i++)
-    {
-        dem = 0;
-        for(int j = 0; j<s.length(); j++)
-        {
-            if(s[i] == i)
-                dem++;
+//    int i, dem = 0;
+//    for(i = 'A'; i<'z'; i++)
+//    {
+//        dem = 0;
+//        for(int j = 0; j<s.length(); j++)
+//        {
+//            if(s[i] == i)
+//                dem++;
+//
+//        }
+//        if(dem!=0)
+//            cout << "ky tu" << i << "xuat hien" << dem << endl;
+//    }
 
-        }
-        if(dem!=0)
-            cout << "ky tu" << i << "xuat hien" << dem << endl;
-    }
+
+//    vector<string>mang;
+//
+//    int sl=0;
+//    for (i=0; i<mang.size(); i++)
+//    {
+//        for (j=0; j<mang.size(); j++)
+//        {
+//            if (mang[i]==mang[j])
+//                sl++;
+//        }
+//        c[i][0]=mang[i];
+//        c[i][1]=sl+48;
+//        sl=0;
+//    }
+//    for (i=0; i<mang.size(); i++)
+//    {
+//        if (c[i][0]!=c[i+1][0])
+//            cout << c[i][0] << " xuat hien " << c[i][1] << " lan" << endl;
+//    }
 
     //cau c: dao nguoc xau
     // cach 1
@@ -109,18 +133,7 @@ int main()
     getline(cin,s2);
     for(int i = 0; i< s2.length(); i++)
     {
-//        if(s2[i] < 48 || s2[i]> 122)
-//        {
-//            s2.erase(i,1);
-//        }
-//        if(s2[i] > 57 && s2[i]< 65)
-//        {
-//            s2.erase(i,1);
-//        }
-//        if(s2[i] > 91 && s2[i]< 97)
-//        {
-//            s2.erase(i,1);
-//        }
+
         if(s2[i] == ' ')
             continue;
         if(s2[i]<'0' || (s2[i] >'9' && s2[i] <'A') || (s2[i] >'Z' && s2[i] <'a') || (s2[i] >'z'))
@@ -162,6 +175,42 @@ int main()
         if(get_higher) get_higher=0;
     }
     cout << out1 + '.' << endl;
+    cout <<endl;
+
+    // cau i  Xâu đó có bao nhiêu từ? Bao nhiêu từ khác nhau? Số lần xuất hiện của mỗi từ.
+    string my_string;
+    //cin.ignore();
+    getline(cin, my_string);
+    vector<string> arr;
+
+    while(!my_string.empty())
+    {
+        arr.push_back(my_string.substr(0, my_string.find(" ")));
+        if(my_string.find(" ") > my_string.size())
+            break;
+        else
+            my_string.erase(0, my_string.find(" ") +1);
+    }
+
+    sort(arr.begin(), arr.end());
+
+    cout << "Xau do co " << arr.size() << "tu." << endl;
+    int count= 1;
+    int soTu = 0;
+    for(int i = 0; i <arr.size(); i++)
+    {
+        if(arr[i] == arr[i+1])
+        {
+            count++;
+        }
+        else{
+            cout << arr[i] << " : " << count << endl;
+            count = 1;
+            soTu++;
+        }
+    }
+    cout << "so tu khac nhau cua xau: " << soTu << endl;
+
 
     return 0;
 }
